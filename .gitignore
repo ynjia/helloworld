@@ -4,3 +4,12 @@
 *.jar
 *.war
 *.ear
+
+# Apple files
+.DS_Store
+
+# Vim swaps
+*.sw?
+
+# Maven target
+target/
