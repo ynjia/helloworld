@@ -24,9 +24,11 @@ helloworld
    Adds a build step to copy artifacts from another project.
 
 6. **Github Plugin**
+
    Trigger a build when a change is pushed to GitHub. However, jenkins-job-builder may not be able to support this plugin.
 
-###Jenkins Jobs###
+###Script to generate Jenkins Jobs###
+
 1. Build job  - yamls/TestAndPackage.yaml 
 2. Deploy job - yamls/Deployment.yaml
 3. Start job  - yamls/Run.yaml  
