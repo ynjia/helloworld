@@ -22,6 +22,6 @@ helloworld
    Trigger a build when a change is pushed to GitHub. However, jenkins-job-builder may not be able to support this plugin
 
 ###Jenkins Jobs###
-1. Build job  - TestAndPackage.yaml 
-2. Deploy job - Deployment.yaml
-3. Start job  - Run.yaml  
+1. Build job  - yamls/TestAndPackage.yaml 
+2. Deploy job - yamls/Deployment.yaml
+3. Start job  - yamls/Run.yaml  
