@@ -1,0 +1,36 @@
+ - job:
+    name: Helloworld-Deployment
+    description: 'Deploy the jar file to folder /tmp/YYMMDD-XX'
+    project-type: freestyle
+    defaults: global
+    disabled: false
+    concurrent: true
+    quiet-period: 5
+    block-downstream: false
+    block-upstream: true
+  
+
+    properties:
+      - inject:
+          script-content: "echo DATE_STRING=$(date '+%y%m%d') > setVariable"
+          properties-file: setVariable
+
+    builders:
+        - copyartifact:
+            project: HelloWorld-TestAndPackage
+            filter: '**/*.jar'
+            target: /tmp/${DATE_STRING}-${PARENT_BUILD_NUMBER}/
+            which-build: last-successful
+            flatten: true
+
+    wrappers:
+        - timeout:
+            timeout: 10
+            fail: true
+        - timestamps
+    
+    publishers:
+        - trigger-parameterized-builds:
+            - project: 'Helloworld-Run'
+              condition: 'SUCCESS'
+              predefined-parameters: 'FOLDER_NAME=/tmp/${DATE_STRING}-${PARENT_BUILD_NUMBER}/'

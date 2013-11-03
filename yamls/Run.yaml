@@ -1,0 +1,21 @@
+ - job:
+    name: Helloworld-Run
+    description: 'Execute helloworld object with a parameter "Jenkins Test"'
+    project-type: freestyle
+    defaults: global
+    disabled: false
+    concurrent: true
+    quiet-period: 5
+    block-downstream: false
+    block-upstream: true
+
+    builders:
+        - shell: "cd ${FOLDER_NAME} && java -classpath helloworld-1.0-SNAPSHOT.jar HelloWorld 'Jenkins Test'"
+
+    wrappers:
+        - timeout:
+            timeout: 10
+            fail: true
+        - timestamps
+    
+ 

@@ -1,0 +1,46 @@
+ - job:
+    name: HelloWorld-TestAndPackage
+    description: 'Run unit tests and package project by Maven'
+    project-type: maven
+    defaults: global
+    disabled: false
+    concurrent: true
+    block-downstream: false
+    block-upstream:  true
+    logrotate:
+      daysToKeep: 10
+      numToKeep: 30
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+
+    scm:
+        - git:
+            url: https://github.com/ynjia/helloworld.git
+            branches:
+                - master
+    
+    triggers:
+        - pollscm: 'H/10 * * * *'
+
+    maven:
+        root-module:
+            group-id: HelloWorld
+            artifact-id: helloworld
+        root-pom: pom.xml
+        goals: "clean site package"
+        maven-name: Maven3
+        automatic-archiving: true
+
+    wrappers:
+        - timeout:
+            timeout: 10
+            fail: true
+        - timestamps
+
+    publishers:
+        - archive:
+            artifacts: 'target/*.jar'
+        - trigger-parameterized-builds:
+            - project: 'Helloworld-Deployment'
+              condition: 'SUCCESS'
+              predefined-parameters: 'PARENT_BUILD_NUMBER=${BUILD_NUMBER}'
