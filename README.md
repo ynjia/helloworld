@@ -31,4 +31,21 @@ helloworld
 
 1. Build job  - yamls/TestAndPackage.yaml 
 2. Deploy job - yamls/Deployment.yaml
-3. Start job  - yamls/Run.yaml  
+3. Start job  - yamls/Run.yaml 
+
+
+
+
+## Enviroment
+* Java Version: 1.6
+* Tool for Test: Junit 4.8.1
+* Build tool: Maven
+
+## Instruction for Running Application
+* Command to run all the tests(all unit tests and function test): mvn clean test
+* Command to validate the solution: mvn clean verify.
+  Then you could check the result in file output.csv under target/classes/
+
+
+
+
